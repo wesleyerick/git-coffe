@@ -21,11 +21,13 @@ android {
     }
 
     buildTypes {
-        release {
+        debug {
+            buildConfigField("String", "BASE_URL", "\"https://api.github.com/\"")
             isMinifyEnabled = false
+            isDebuggable = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
+                "proguard-rules.pro",
             )
         }
     }
@@ -38,6 +40,7 @@ android {
     }
     buildFeatures {
         compose = true
+        buildConfig = true
     }
     composeOptions {
         kotlinCompilerExtensionVersion = "1.5.1"
@@ -61,9 +64,12 @@ dependencies {
 
     implementation(platform(libs.koin.bom))
     implementation(libs.koin.core)
+    implementation(libs.koin.compose)
     implementation(libs.coil.compose)
     implementation(libs.constraint.layout.compose)
     implementation(libs.navigation.compose)
+    implementation(libs.retrofit)
+    implementation(libs.retrofit.converter.gson)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

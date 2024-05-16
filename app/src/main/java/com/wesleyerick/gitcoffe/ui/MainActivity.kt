@@ -16,18 +16,22 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.rememberNavController
 import com.wesleyerick.gitcoffe.ui.navigation.AppNavHost
 import com.wesleyerick.gitcoffe.ui.theme.GitCoffeTheme
+import org.koin.androidx.compose.KoinAndroidContext
+import org.koin.compose.KoinContext
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            GitCoffeTheme {
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
-                ) {
-                    AppNavHost(navController = rememberNavController())
+            KoinContext {
+                GitCoffeTheme {
+                    Surface(
+                        modifier = Modifier.fillMaxSize(),
+                        color = MaterialTheme.colorScheme.background
+                    ) {
+                        AppNavHost(navController = rememberNavController())
+                    }
                 }
             }
         }

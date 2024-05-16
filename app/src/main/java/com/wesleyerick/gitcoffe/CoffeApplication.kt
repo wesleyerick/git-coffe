@@ -2,6 +2,7 @@ package com.wesleyerick.gitcoffe
 
 import android.app.Application
 import com.wesleyerick.gitcoffe.di.modulesList
+import org.koin.android.ext.koin.androidLogger
 
 import org.koin.core.context.loadKoinModules
 import org.koin.core.context.startKoin
@@ -14,6 +15,7 @@ class CoffeApplication : Application() {
     }
 
     private fun initKoin() = startKoin {
+        androidLogger()
         loadKoinModules(modulesList)
     }
 }

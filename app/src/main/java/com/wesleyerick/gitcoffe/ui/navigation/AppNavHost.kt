@@ -5,7 +5,7 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.wesleyerick.gitcoffe.ui.screen.PopularScreen
+import com.wesleyerick.gitcoffe.ui.screen.popular.presentation.PopularScreen
 import com.wesleyerick.gitcoffe.ui.screen.SplashScreen
 
 @Composable
