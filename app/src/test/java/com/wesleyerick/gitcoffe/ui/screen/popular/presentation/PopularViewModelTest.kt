@@ -17,12 +17,11 @@ import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.core.context.startKoin
 import org.koin.core.context.stopKoin
 import org.koin.dsl.module
+import org.koin.test.KoinTest
 import org.koin.test.inject
-import org.koin.test.junit5.AutoCloseKoinTest
 
 @ExperimentalCoroutinesApi
-class PopularViewModelTest : AutoCloseKoinTest() {
-
+class PopularViewModelTest : KoinTest {
 
     @OptIn(ExperimentalCoroutinesApi::class)
     @get:Rule
