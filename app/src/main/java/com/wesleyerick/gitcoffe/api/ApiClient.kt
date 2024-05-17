@@ -1,7 +1,7 @@
 package com.wesleyerick.gitcoffe.api
 
 import com.wesleyerick.gitcoffe.ui.screen.popular.data.service.PopularService
-import com.wesleyerick.gitcoffe.ui.screen.pr.data.PullRequestService
+import com.wesleyerick.gitcoffe.ui.screen.pr.data.service.PullRequestService
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 

@@ -20,16 +20,14 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
-import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.mutableStateListOf
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
@@ -38,9 +36,10 @@ import androidx.navigation.NavController
 import coil.compose.AsyncImage
 import com.wesleyerick.gitcoffe.R
 import com.wesleyerick.gitcoffe.ui.component.InfiniteScrollList
+import com.wesleyerick.gitcoffe.ui.component.TitleItem
 import com.wesleyerick.gitcoffe.ui.navigation.Screen
 import com.wesleyerick.gitcoffe.ui.screen.popular.data.model.PopularRepositoriesItem
-import com.wesleyerick.gitcoffe.ui.theme.AppName
+import com.wesleyerick.gitcoffe.ui.theme.TitleTopScreen
 import com.wesleyerick.gitcoffe.ui.theme.ListDivider
 import com.wesleyerick.gitcoffe.ui.theme.StarIcon
 import com.wesleyerick.gitcoffe.ui.theme.Title
@@ -58,7 +57,7 @@ fun PopularScreen(
     Column(modifier = Modifier.padding(16.dp)) {
         Text(
             text = context.getString(R.string.app_name),
-            color = AppName,
+            color = TitleTopScreen,
             fontSize = 24.sp,
             fontWeight = FontWeight.Bold,
             modifier = Modifier
@@ -73,7 +72,11 @@ fun PopularScreen(
         ) {
             when (listState) {
                 is ResourceView.Loading -> {
-                    CircularProgressIndicator()
+                    CircularProgressIndicator(
+                        modifier = Modifier.semantics {
+                            contentDescription = "Loading"
+                        }
+                    )
                 }
 
                 is ResourceView.Success -> {
@@ -112,13 +115,8 @@ fun PopularList(
             viewModel.getList()
         }
     ) { position ->
-                    PopularListItem(navController, list[position])
+        PopularListItem(navController, list[position])
     }
-//    LazyColumn {
-//        items(list.size) { position ->
-//            PopularListItem(navController, list[position])
-//        }
-//    }
 }
 
 @Composable
@@ -127,7 +125,11 @@ fun PopularListItem(navController: NavController, item: PopularRepositoriesItem)
         Row(modifier = Modifier
             .fillMaxWidth()
             .clickable {
-                navController.navigate(Screen.PR.name)
+                navController.navigate(
+                    Screen.PR.withArgs
+                        .replace("{creator}", item.owner.login)
+                        .replace("{repo}", item.name)
+                )
             }
         ) {
             UserInformation(item, modifier = Modifier.fillMaxSize(0.25f))
@@ -148,18 +150,7 @@ fun PopularListItem(navController: NavController, item: PopularRepositoriesItem)
 @Composable
 fun RepositoryInformation(item: PopularRepositoriesItem, modifier: Modifier) {
     Column(modifier = modifier) {
-        // Title
-        Text(
-            text = item.name,
-            color = Title,
-            fontSize = 18.sp,
-            fontWeight = FontWeight.SemiBold,
-            maxLines = 1,
-            overflow = TextOverflow.Ellipsis
-        )
-
-
-        // Description
+        TitleItem(text = item.name)
         Text(
             text = item.description,
             maxLines = 2,

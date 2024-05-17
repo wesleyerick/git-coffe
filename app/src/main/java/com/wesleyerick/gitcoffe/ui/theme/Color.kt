@@ -12,5 +12,6 @@ val Pink40 = Color(0xFF7D5260)
 
 val StarIcon = Color(0xFFFFD047)
 val Title = Color(0xFF3F51B5)
+val CreatedAt = Color(0xFFFFA000)
 val ListDivider = Color(0xFFE7E7E7)
-val AppName = Color(0xFF664A48)
+val TitleTopScreen = Color(0xFF664A48)
