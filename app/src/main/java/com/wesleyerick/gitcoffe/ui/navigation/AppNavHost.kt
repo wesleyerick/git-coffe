@@ -7,6 +7,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.wesleyerick.gitcoffe.ui.screen.popular.presentation.PopularScreen
 import com.wesleyerick.gitcoffe.ui.screen.SplashScreen
+import com.wesleyerick.gitcoffe.ui.screen.pr.presentation.PullRequestScreen
 
 @Composable
 fun AppNavHost(
@@ -24,6 +25,9 @@ fun AppNavHost(
         }
         composable(NavigationItem.Popular.route) {
             PopularScreen(navController)
+        }
+        composable(NavigationItem.PR.route) {
+            PullRequestScreen(navController)
         }
     }
 }

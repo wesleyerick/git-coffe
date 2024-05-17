@@ -1,25 +1,24 @@
 package com.wesleyerick.gitcoffe.ui.screen.popular.domain
 
-import android.content.Context
-import com.wesleyerick.gitcoffe.R
+import com.wesleyerick.gitcoffe.ui.screen.popular.data.model.PopularRepositoriesItem
 import com.wesleyerick.gitcoffe.ui.screen.popular.data.repository.IRepositoryPopular
-import com.wesleyerick.gitcoffe.utils.safeRunDispatcher
 import com.wesleyerick.gitcoffe.utils.Result
+import com.wesleyerick.gitcoffe.utils.safeRunDispatcher
 
 class GetPopularListUseCase(
     private val repository: IRepositoryPopular,
-    private val context: Context
 ) {
-    //    suspend operator fun invoke() = repository.getList()
-    suspend operator fun invoke() = when (
-        val result = safeRunDispatcher {
-            repository.getList()
-        }
-    ) {
-        is Result.Success -> {
-            Result.Success(result.data.body())
-        }
+    suspend operator fun invoke(page: Int): Result<List<PopularRepositoriesItem>> =
+        when (
+            val result = safeRunDispatcher {
+                repository.getList(page)
+            }
+        ) {
+            is Result.Success -> {
+                val list = result.data.body()?.items ?: emptyList()
+                Result.Success(list)
+            }
 
-        is Result.Failure -> Result.Failure(result.error, context.getString(R.string.default_error_message))
-    }
+            is Result.Failure -> Result.Failure(result.error)
+        }
 }

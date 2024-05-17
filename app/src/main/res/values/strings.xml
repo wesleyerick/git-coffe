@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Git Coffe</string>
     <string name="default_error_message">An error occurred, please try again late</string>
+    <string name="no_data">No repositories available</string>
 </resources>

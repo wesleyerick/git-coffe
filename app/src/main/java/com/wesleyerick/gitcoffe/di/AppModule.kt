@@ -30,7 +30,7 @@ val repositoryModule = module {
 }
 
 val useCaseModule = module {
-    factory { GetPopularListUseCase(get(), androidContext()) }
+    factory { GetPopularListUseCase(get()) }
 
 //    factory { StarshipsUseCases(get(), get()) }
 }
