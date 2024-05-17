@@ -32,7 +32,7 @@ import androidx.navigation.NavController
 import com.wesleyerick.gitcoffe.R
 import com.wesleyerick.gitcoffe.ui.component.GitCoffeTitle
 import com.wesleyerick.gitcoffe.ui.component.TitleItem
-import com.wesleyerick.gitcoffe.ui.screen.pr.data.model.PullRequestItem
+import com.wesleyerick.gitcoffe.ui.screen.pr.data.model.PullRequestItemResult
 import com.wesleyerick.gitcoffe.ui.theme.CreatedAt
 import com.wesleyerick.gitcoffe.ui.theme.ListDivider
 import com.wesleyerick.gitcoffe.utils.ResourceView
@@ -90,7 +90,7 @@ fun PullRequestScreen(
 
                 is ResourceView.Success -> {
                     val listSuccess =
-                        (listState as ResourceView.Success<List<PullRequestItem>>).data
+                        (listState as ResourceView.Success<List<PullRequestItemResult>>).data
                     if (listSuccess.isNotEmpty()) {
                         PullRequestList(listSuccess)
                     } else {
@@ -113,7 +113,7 @@ fun PullRequestScreen(
 }
 
 @Composable
-fun PullRequestList(list: List<PullRequestItem>) {
+fun PullRequestList(list: List<PullRequestItemResult>) {
     LazyColumn {
         items(list.size) { index ->
             PullRequestListItem(list[index])
@@ -122,7 +122,7 @@ fun PullRequestList(list: List<PullRequestItem>) {
 }
 
 @Composable
-fun PullRequestListItem(item: PullRequestItem) {
+fun PullRequestListItem(item: PullRequestItemResult) {
     Column {
         TitleItem(text = item.title, maxLines = 2)
         Row {

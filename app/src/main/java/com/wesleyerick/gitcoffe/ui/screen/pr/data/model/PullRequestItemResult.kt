@@ -1,6 +1,6 @@
 package com.wesleyerick.gitcoffe.ui.screen.pr.data.model
 
-data class PullRequestItem(
+data class PullRequestItemResult(
     val active_lock_reason: Any = Any(),
     val assignee: Any = Any(),
     val assignees: List<Any> = emptyList(),
